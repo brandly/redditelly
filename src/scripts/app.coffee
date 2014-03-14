@@ -1,16 +1,16 @@
-angular.module('rddt.services', [])
-angular.module('rddt.filters', [])
-angular.module('rddt.directives', [])
+angular.module('redditelly.services', [])
+angular.module('redditelly.filters', [])
+angular.module('redditelly.directives', [])
 
 dependencies = [
-    'rddt.services'
-    'rddt.filters'
-    'rddt.directives'
+    'redditelly.services'
+    'redditelly.filters'
+    'redditelly.directives'
     'ui.router'
     'youtube'
 ]
 
-angular.module('rddt', dependencies).config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) ->
+angular.module('redditelly', dependencies).config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) ->
     $stateProvider
 
         .state 'app',

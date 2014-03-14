@@ -1,4 +1,4 @@
-angular.module('rddt')
+angular.module('redditelly')
 
 .controller 'SubredditCtrl', ['$scope', '$stateParams', '$reddit', '$youtube', ($scope, $stateParams, $reddit, $youtube) ->
     $scope.posts = null

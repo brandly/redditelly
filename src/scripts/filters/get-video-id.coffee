@@ -1,4 +1,4 @@
-angular.module('rddt.filters')
+angular.module('redditelly.filters')
 
 .filter 'getVideoIDfromURL', [ ->
     ### Known exceptions

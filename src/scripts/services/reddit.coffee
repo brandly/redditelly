@@ -1,4 +1,4 @@
-angular.module('rddt.services')
+angular.module('redditelly.services')
 
 .service '$reddit', ['$http', ($http) ->
     url = (subreddit) ->

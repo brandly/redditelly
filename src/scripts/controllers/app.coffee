@@ -1,4 +1,4 @@
-angular.module('rddt')
+angular.module('redditelly')
 
 .controller 'AppCtrl', ['$scope', ($scope) ->
     $scope.subreddits = [
