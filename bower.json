@@ -1,0 +1,9 @@
+{
+  "name": "rddt",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "1.2.10",
+    "lodash": "~2.4.1"
+  },
+  "private": true
+}

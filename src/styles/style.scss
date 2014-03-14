@@ -1,0 +1,19 @@
+$main-font-color: #333;
+
+$page-width: 900px;
+
+body {
+    overflow-y: scroll;
+    color: $main-font-color;
+    font-family: sans-serif;
+}
+
+.page {
+    min-height: 500px;
+    width: $page-width;
+    margin: 40px auto;
+}
+
+[ng-click] {
+    cursor: pointer;
+}
