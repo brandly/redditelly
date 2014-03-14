@@ -1,5 +1,9 @@
 angular.module('rddt')
 
-.controller 'AppCtrl', ['$scope', '$state', ($scope, $state) ->
-
+.controller 'AppCtrl', ['$scope', ($scope) ->
+    $scope.subreddits = [
+        'videos'
+        'youtubehaiku'
+        'deepintoyoutube'
+    ]
 ]

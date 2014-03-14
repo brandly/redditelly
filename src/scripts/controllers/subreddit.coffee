@@ -2,13 +2,13 @@ angular.module('rddt')
 
 .controller 'SubredditCtrl', ['$scope', '$stateParams', '$reddit', '$youtube', ($scope, $stateParams, $reddit, $youtube) ->
     $scope.posts = null
-    $scope.currentVideo = null
+    $scope.currentPost = null
 
-    $reddit.get($stateParams.subreddit).then (posts) ->
+    $reddit.get($stateParams.r).then (posts) ->
         $scope.posts = posts
         $scope.setNext()
 
-    getNextVideo = ->
+    getNextPost = ->
         # no `do while` in coffeescript :(
         post = $scope.posts.shift()
         while post?.domain isnt 'youtube.com'
@@ -16,13 +16,11 @@ angular.module('rddt')
         return post
 
     $scope.setNext = ->
-        $scope.currentVideo = getNextVideo().url
+        $scope.currentPost = getNextPost()
 
     $scope.$on 'youtube.player.ended', ->
         $scope.setNext()
 
     $scope.$on 'youtube.player.ready', ->
         $youtube.player.playVideo()
-
-    window.butts = $scope
 ]

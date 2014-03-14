@@ -19,7 +19,7 @@ angular.module('rddt', dependencies).config(['$stateProvider', '$urlRouterProvid
             controller: 'AppCtrl'
 
         .state 'subreddit',
-            url: '/r/:subreddit'
+            url: '/r/:r'
             templateUrl: 'views/subreddit.html'
             controller: 'SubredditCtrl'
 
