@@ -7,6 +7,10 @@
 
   </head>
   <body>
+    <header class="page">
+      <h2 class="subreddit" ng-cloak ng-if="currentSubreddit">r/{{currentSubreddit}}</h2>
+      <h1 class="title">redditelly</h1>
+    </header>
     <div ui-view></div>
 
     <script src="lib.js"></script>
