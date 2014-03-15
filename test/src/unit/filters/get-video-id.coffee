@@ -20,3 +20,8 @@ describe 'get video id from url', ->
         url = 'http://www.youtube.com/watch?feature=player_detailpage&amp;v=93LvTKF_jW0#t=1'
         id = '93LvTKF_jW0'
         expect(getVideoId(url)).toBe id
+
+    it 'should handle "&amp;feature=youtu.be"', ->
+        url = 'https://www.youtube.com/watch?v=VbNF9X1waSc&amp;feature=youtu.be'
+        id = 'VbNF9X1waSc'
+        expect(getVideoId(url)).toBe id

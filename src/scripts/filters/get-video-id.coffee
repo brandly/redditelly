@@ -11,12 +11,20 @@ angular.module('redditelly.filters')
     return (url='') ->
         id = url.replace youtubeRegexp, '$1'
 
-        # links like this: "http://www.youtube.com/attribution_link?a=pxa6goHqzaA&amp;u=%2Fwatch%3Fv%3DdPdgx30w9sU%26feature%3Dshare"
-        # have the real query string URI encoded behind a ';'.
-        # at this point, `id is 'pxa6goHqzaA;u=%2Fwatch%3Fv%3DdPdgx30w9sU%26feature%3Dshare'
         if contains id, ';'
-            uriComponent = decodeURIComponent id.split(';')[1]
-            id = ('http://youtube.com' + uriComponent).replace youtubeRegexp, '$1'
+            pieces = id.split ';'
+
+            if contains pieces[1], '%'
+                # links like this: "http://www.youtube.com/attribution_link?a=pxa6goHqzaA&amp;u=%2Fwatch%3Fv%3DdPdgx30w9sU%26feature%3Dshare"
+                # have the real query string URI encoded behind a ';'.
+                # at this point, `id is 'pxa6goHqzaA;u=%2Fwatch%3Fv%3DdPdgx30w9sU%26feature%3Dshare'
+                uriComponent = decodeURIComponent id.split(';')[1]
+                id = ('http://youtube.com' + uriComponent).replace youtubeRegexp, '$1'
+            else
+                # https://www.youtube.com/watch?v=VbNF9X1waSc&amp;feature=youtu.be
+                # strip the ';feature=youtu.be'
+                id = pieces[0]
+
         else if contains id, '#'
             # id might look like '93LvTKF_jW0#t=1'
             # and we want '93LvTKF_jW0'
