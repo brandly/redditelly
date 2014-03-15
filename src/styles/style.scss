@@ -10,7 +10,7 @@ $left-pane-width: 300px;
 body {
     overflow-y: scroll;
     color: $main-font-color;
-    font-family: sans-serif;
+    font-family: 'Sintony', sans-serif;
     background-color: #222;
 }
 
@@ -31,8 +31,8 @@ header {
     padding: 10px;
 
     .subreddit {
-        font-size: 32px;
-        line-height: 68px;
+        font-size: 24px;
+        line-height: 72px;
         float: left;
     }
 
@@ -71,7 +71,7 @@ header {
 
     .title {
         font-size: 42px;
-        line-height: 48px;
+        line-height: 52px;
         margin: 10px 0;
     }
 }
