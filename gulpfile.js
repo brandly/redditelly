@@ -19,38 +19,33 @@ if (!gutil.env.gh) {
     minify = gutil.noop;
 }
 
-gulp.task('test:build', function () {
-    gulp.src(['test/src/unit/**/*.coffee'])
-        .pipe(coffee({bare: true}))
-        .on('error', gutil.log)
-        .pipe(concat('tests.js'))
-        .pipe(gulp.dest('./test/build/'));
-});
-
-gulp.task('test', ['build', 'test:build'], function () {
-    gulp.src([
+gulp.task('test', function () {
+    return gulp.src([
         build + 'lib.js',
         'bower_components/angular-mocks/angular-mocks.js',
         build + 'app.js',
-        'test/build/tests.js'
-    ]).pipe(karma({
+        'test/src/unit/**/*.coffee'
+    ])
+    .on('error', function (e) {
+        throw e;
+    })
+    .pipe(karma({
         configFile: 'test/config/karma.conf.coffee',
         action: 'watch'
     }));
 });
 
-gulp.task('build', function () {
-
-    // Coffee
-    gulp.src('src/scripts/**/*.coffee')
+gulp.task('coffee', function () {
+    return gulp.src('src/scripts/**/*.coffee')
         .pipe(coffee({bare: true}))
         .on('error', gutil.log)
         .pipe(uglify())
         .pipe(concat('app.js'))
         .pipe(gulp.dest(build));
+});
 
-    // Index
-    gulp.src('src/index.html')
+gulp.task('index', function () {
+    return gulp.src('src/index.html')
         .pipe(htmlbuild({
             js: function (files, callback) {
                 gulp.src(files)
@@ -61,41 +56,50 @@ gulp.task('build', function () {
             }
         }))
         .pipe(gulp.dest(build));
+});
 
-    // Views
-    gulp.src('src/views/*.html')
+gulp.task('views', function () {
+    return gulp.src('src/views/*.html')
         .pipe(gulp.dest(build + 'views/'));
+});
 
-    // SASS
-    gulp.src('src/styles/**/*.scss')
+gulp.task('sass', function () {
+    return gulp.src('src/styles/**/*.scss')
         .pipe(sass())
         .on('error', gutil.log)
         .pipe(minify())
         .pipe(concat('the.css'))
         .pipe(gulp.dest(build));
+});
 
-    // Icons
-    gulp.src('src/styles/icons/*')
+gulp.task('icons', function () {
+    return gulp.src('src/styles/icons/*')
         .pipe(gulp.dest(build + 'icons/'));
+});
 
-    // Images
-    gulp.src('src/styles/img/*')
+gulp.task('images', function () {
+    return gulp.src('src/styles/img/*')
         .pipe(gulp.dest(build + 'img/'));
+});
 
-    // Favicons
-    gulp.src('src/styles/favicons/*')
+gulp.task('favicons', function () {
+    return gulp.src('src/styles/favicons/*')
         .pipe(gulp.dest(build));
 });
 
-gulp.task('default', ['build', 'test'], function () {
-    if (!gutil.env.gh) {
-        gulp.watch(['src/**'], function () {
-            gulp.run('build');
-        });
+gulp.task('build', [
+    'coffee',
+    'index',
+    'views',
+    'sass',
+    'icons',
+    'images',
+    'favicons'
+]);
 
-        gulp.watch(['test/src/**'], function () {
-            gulp.run('test:build');
-        });
+gulp.task('default', ['build'], function () {
+    if (!gutil.env.gh) {
+        gulp.watch(['src/**'], ['build']);
 
         var
         app = express(),

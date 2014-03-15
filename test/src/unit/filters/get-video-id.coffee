@@ -18,5 +18,5 @@ describe 'get video id from url', ->
 
     it 'should handle almost a query string', ->
         url = 'http://www.youtube.com/watch?feature=player_detailpage&amp;v=93LvTKF_jW0#t=1'
-        id = '93LvTKF_jW'
+        id = '93LvTKF_jW0'
         expect(getVideoId(url)).toBe id
