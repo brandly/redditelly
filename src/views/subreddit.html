@@ -1,20 +1,20 @@
 
 <div class="page">
-  <div class="left-pane">
-    <ul>
-      <li class="post" ng-repeat="post in posts">
-        <img class="thumbnail" ng-src="{{post.url | getVideoIDfromURL | idToThumbnail:'mqdefault'}}">
-        <!-- <p class="title">{{post.title}}</p> -->
-      </li>
-    </ul>
-  </div>
-
-  <div class="right-pane">
+  <div class="left-pane video-player">
     <youtube-player id="current-video" video-id="currentPost.url | getVideoIDfromURL"></youtube-player>
     <div class="details">
       <h3 class="title">{{currentPost.title}}</h3>
     </div>
 
     <button ng-click="setNext()">next</button>
+  </div>
+
+  <div class="right-pane video-list">
+    <ul>
+      <li class="post" ng-repeat="post in posts">
+        <img class="thumbnail" ng-src="{{post.url | getVideoIDfromURL | idToThumbnail:'mqdefault'}}">
+        <!-- <p class="title">{{post.title}}</p> -->
+      </li>
+    </ul>
   </div>
 </div>

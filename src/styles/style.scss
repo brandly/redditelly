@@ -1,7 +1,8 @@
 $main-font-color: #ddd;
 
-$page-width: 981.1px;
-$left-pane-width: 300px;
+$page-width: 980px;
+$right-pane-width: 300px;
+$left-pane-width: $page-width - $right-pane-width;
 
 * {
     box-sizing: border-box;
@@ -17,6 +18,7 @@ body {
 .page {
     width: $page-width;
     margin: 20px auto;
+    position: relative;
 }
 
 [ng-click] {
@@ -43,28 +45,18 @@ header {
 }
 
 .left-pane {
-    float: left;
+    position: absolute;
+    left: 0;
     width: $left-pane-width;
-
-    .post {
-        clear: both;
-
-        .title {
-            margin: 0 10px 10px 80px;
-            width: 170px;
-        }
-    }
-
-    .thumbnail {
-        margin: 10px;
-        width: $left-pane-width - 20px;
-    }
 }
 
 .right-pane {
-    margin-left: $left-pane-width + 10px;
-    padding: 10px;
+    width: $right-pane-width;
+    margin-left: $left-pane-width;
+}
 
+.video-player {
+    width: $left-pane-width - 20px;
     .details {
         padding: 10px;
     }
@@ -73,5 +65,12 @@ header {
         font-size: 42px;
         line-height: 52px;
         margin: 10px 0;
+    }
+}
+
+.video-list {
+    .thumbnail {
+        margin-bottom: 10px;
+        width: $right-pane-width;
     }
 }
