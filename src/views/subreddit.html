@@ -1,2 +1,20 @@
-<youtube-player id="current-video" video-id="currentPost.url | getVideoIDfromURL"></youtube-player>
-<button ng-click="setNext()">next</button>
+
+<div class="page">
+  <div class="left-pane">
+    <ul>
+      <li class="post" ng-repeat="post in posts">
+        <img class="thumbnail" ng-src="{{post.url | getVideoIDfromURL | idToThumbnail:'mqdefault'}}">
+        <!-- <p class="title">{{post.title}}</p> -->
+      </li>
+    </ul>
+  </div>
+
+  <div class="right-pane">
+    <youtube-player id="current-video" video-id="currentPost.url | getVideoIDfromURL"></youtube-player>
+    <div class="details">
+      <h3 class="title">{{currentPost.title}}</h3>
+    </div>
+
+    <button ng-click="setNext()">next</button>
+  </div>
+</div>

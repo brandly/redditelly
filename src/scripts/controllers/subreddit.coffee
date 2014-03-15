@@ -5,15 +5,13 @@ angular.module('redditelly')
     $scope.currentPost = null
 
     $reddit.get($stateParams.r).then (posts) ->
-        $scope.posts = posts
+        console.log 'POSTS', posts
+        $scope.posts = posts.filter (post) ->
+            post.domain is 'youtube.com'
         $scope.setNext()
 
     getNextPost = ->
-        # no `do while` in coffeescript :(
-        post = $scope.posts.shift()
-        while post?.domain isnt 'youtube.com'
-            post = $scope.posts.shift()
-        return post
+        $scope.posts.shift()
 
     $scope.setNext = ->
         $scope.currentPost = getNextPost()

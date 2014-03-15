@@ -25,4 +25,8 @@ angular.module('redditelly', dependencies).config(['$stateProvider', '$urlRouter
 
         $urlRouterProvider.otherwise '/'
 
+]).run(['$rootScope', ($rootScope) ->
+    $rootScope.$on '$stateChangeSuccess', (e, toState, toParams) ->
+        $rootScope.currentSubreddit = toParams.r
+        $rootScope.pageTitle = toParams.r or 'redditelly'
 ])

@@ -1,19 +1,77 @@
-$main-font-color: #333;
+$main-font-color: #ddd;
 
-$page-width: 900px;
+$page-width: 981.1px;
+$left-pane-width: 300px;
+
+* {
+    box-sizing: border-box;
+}
 
 body {
     overflow-y: scroll;
     color: $main-font-color;
     font-family: sans-serif;
+    background-color: #222;
 }
 
 .page {
-    min-height: 500px;
     width: $page-width;
-    margin: 40px auto;
+    margin: 20px auto;
 }
 
 [ng-click] {
     cursor: pointer;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+header {
+    padding: 10px;
+
+    .subreddit {
+        font-size: 32px;
+        line-height: 68px;
+        float: left;
+    }
+
+    .title {
+        font-size: 56px;
+        text-align: right;
+    }
+}
+
+.left-pane {
+    float: left;
+    width: $left-pane-width;
+
+    .post {
+        clear: both;
+
+        .title {
+            margin: 0 10px 10px 80px;
+            width: 170px;
+        }
+    }
+
+    .thumbnail {
+        margin: 10px;
+        width: $left-pane-width - 20px;
+    }
+}
+
+.right-pane {
+    margin-left: $left-pane-width + 10px;
+    padding: 10px;
+
+    .details {
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 42px;
+        line-height: 48px;
+        margin: 10px 0;
+    }
 }

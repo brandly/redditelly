@@ -5,5 +5,7 @@ angular.module('redditelly')
         'videos'
         'youtubehaiku'
         'deepintoyoutube'
+        'music'
+        'listentothis'
     ]
 ]
