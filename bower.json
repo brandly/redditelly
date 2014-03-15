@@ -2,8 +2,11 @@
   "name": "redditelly",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "1.2.10",
+    "angular": "1.2.14",
     "lodash": "~2.4.1"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "angular-mocks": "~1.2.14"
+  }
 }

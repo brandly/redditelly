@@ -9,6 +9,7 @@ uglify = require('gulp-uglify'),
 minify = require('gulp-minify-css'),
 path = require('path'),
 express = require('express'),
+karma = require('gulp-karma'),
 
 build = gutil.env.gh ? './gh-pages/' : './build/';
 
@@ -17,6 +18,26 @@ if (!gutil.env.gh) {
     uglify = gutil.noop;
     minify = gutil.noop;
 }
+
+gulp.task('test:build', function () {
+    gulp.src(['test/src/unit/**/*.coffee'])
+        .pipe(coffee({bare: true}))
+        .on('error', gutil.log)
+        .pipe(concat('tests.js'))
+        .pipe(gulp.dest('./test/build/'));
+});
+
+gulp.task('test', ['build', 'test:build'], function () {
+    gulp.src([
+        build + 'lib.js',
+        'bower_components/angular-mocks/angular-mocks.js',
+        build + 'app.js',
+        'test/build/tests.js'
+    ]).pipe(karma({
+        configFile: 'test/config/karma.conf.coffee',
+        action: 'watch'
+    }));
+});
 
 gulp.task('build', function () {
 
@@ -66,12 +87,14 @@ gulp.task('build', function () {
         .pipe(gulp.dest(build));
 });
 
-gulp.task('default', function () {
-    gulp.run('build');
-
+gulp.task('default', ['build', 'test'], function () {
     if (!gutil.env.gh) {
         gulp.watch(['src/**'], function () {
             gulp.run('build');
+        });
+
+        gulp.watch(['test/src/**'], function () {
+            gulp.run('test:build');
         });
 
         var
