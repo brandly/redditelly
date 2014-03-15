@@ -14,8 +14,8 @@
     </div>
     <ul>
       <li class="post" ng-repeat="post in posts">
-        <img class="thumbnail" ng-src="{{post.url | getVideoIDfromURL | idToThumbnail:'mqdefault'}}">
-        <!-- <p class="title">{{post.title}}</p> -->
+        <img class="thumbnail" ng-src="{{post.url | getVideoIDfromURL | idToThumbnail}}">
+        <h4 class="title">{{post.title}}</h4>
       </li>
     </ul>
   </div>
