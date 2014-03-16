@@ -21,8 +21,13 @@
   </head>
   <body>
     <header class="page">
-      <h2 class="subreddit" ng-cloak ng-if="currentSubreddit">r/{{currentSubreddit}}</h2>
-      <h1 class="title">redditelly</h1>
+      <div class="left-pane">
+        <h2 class="subreddit" ng-cloak ng-if="currentSubreddit">r/{{currentSubreddit}}</h2>
+      </div>
+      <div class="right-pane">
+        <img class="redditelly-head" src="img/redditelly-head-straight.svg" alt="redditelly"></img>
+        <h1 class="title">redditelly</h1>
+      </div>
     </header>
     <div ui-view></div>
 

@@ -7,6 +7,7 @@ $page-width: 1040px;
 $space-between-panes: 20px;
 $left-pane-width: 640px;
 $right-pane-width: $page-width - $left-pane-width - $space-between-panes;
+$thin-border: 1px solid $main-font-color;
 
 * {
     box-sizing: border-box;
@@ -42,18 +43,29 @@ a {
 }
 
 header {
+    $header-height: 102px;
+    height: $header-height;
     padding: 10px 0;
-    $title-font-size: 82px;
 
     .subreddit {
         font-size: 24px;
-        line-height: $title-font-size;
+        // line-height: 102px;
+        line-height: $header-height;
         float: left;
     }
 
     .title {
-        font-size: $title-font-size;
+        font-size: 54px;
+        line-height: $header-height;
         text-align: right;
+    }
+
+    $head-width: 100px;
+    $head-height: $head-width;
+    .redditelly-head {
+        float: left;
+        width: $head-width;
+        height: $head-height;
     }
 }
 
@@ -98,9 +110,9 @@ header {
         color: $main-font-color;
         outline: none;
         background: none;
-        border: 1px solid $main-font-color;
-        border-left: none;
-        border-right: none;
+        border: none;
+        border-top: $thin-border;
+        border-bottom: $thin-border;
         height: 30px;
 
         &:hover {
