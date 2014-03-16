@@ -5,7 +5,7 @@
     <div class="video-info">
       <h3 class="title" title="{{currentPost.title}}" click-to-expand>{{currentPost.title}}</h3>
       <div class="details" ng-show="currentPost">
-        (+{{currentPost.ups}} / -{{currentPost.downs}})
+        +{{currentPost.ups - currentPost.downs}}
         <span class="divider">|</span>
           <a href="http://reddit.com{{currentPost.permalink}}" target="_blank">
             <ng-pluralize count="currentPost.num_comments"
