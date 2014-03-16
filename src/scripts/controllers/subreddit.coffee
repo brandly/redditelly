@@ -8,16 +8,20 @@ angular.module('redditelly')
         console.log 'POSTS', posts
         $scope.posts = posts.filter (post) ->
             post.domain is 'youtube.com'
-        $scope.setNext()
+        $scope.nextVideo()
 
     getNextPost = ->
         $scope.posts.shift()
 
-    $scope.setNext = ->
+    $scope.nextVideo = ->
         $scope.currentPost = getNextPost()
 
+    $scope.selectPost = (id) ->
+        while $scope.currentPost?.id isnt id
+            $scope.nextVideo()
+
     $scope.$on 'youtube.player.ended', ->
-        $scope.setNext()
+        $scope.nextVideo()
 
     $scope.$on 'youtube.player.ready', ->
         $youtube.player.playVideo()

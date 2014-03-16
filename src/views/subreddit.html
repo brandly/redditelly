@@ -9,11 +9,11 @@
 
   <div class="right-pane">
     <div class="controls" ng-show="currentPost">
-      <button ng-click="setPrev()" class="prev">&lt;</button>
-      <button ng-click="setNext()" class="next">&gt;</button>
+      <button ng-click="prevVideo()" class="prev">&lt;</button>
+      <button ng-click="nextVideo()" class="next">&gt;</button>
     </div>
     <ul class="video-list" screen-height height-offset="182">
-      <li class="post" ng-repeat="post in posts">
+      <li class="post" ng-repeat="post in posts" ng-click="selectPost(post.id)">
         <img class="thumbnail" ng-src="{{post.url | getVideoIDfromURL | idToThumbnail}}">
         <h4 class="title">{{post.title}}</h4>
       </li>
