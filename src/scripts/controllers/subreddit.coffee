@@ -19,8 +19,7 @@ angular.module('redditelly')
             if $scope.posts?.length
                 $scope.nextVideo()
 
-        id = $stateParams.v
-        $reddit.getPostById(id).then (post) ->
+        $reddit.getPostById($stateParams.v).then (post) ->
             if validPost post
                 $scope.currentPost = post
             else
