@@ -16,9 +16,17 @@ body {
     background-color: #222;
 }
 
+a {
+    color: $main-font-color;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 .page {
     width: $page-width;
-    margin: 20px auto;
+    margin: 20px auto 0 auto;
     position: relative;
 }
 
@@ -70,36 +78,41 @@ header {
     }
 }
 
+.controls {
+    height: 40px;
+
+    .next, .prev {
+        width: 50%;
+        color: $main-font-color;
+        outline: none;
+        background: none;
+        border: 1px solid $main-font-color;
+        border-left: none;
+        border-right: none;
+        height: 30px;
+
+        &:hover {
+            background-color: #333;
+        }
+    }
+
+    .prev {
+        float: left;
+    }
+
+    .next {
+        float: right;
+    }
+}
+
 $video-list-width: $right-pane-width;
 .video-list {
     width: $video-list-width;
-    .controls {
-        height: 40px;
-
-        .next, .prev {
-            width: 50%;
-            color: $main-font-color;
-            outline: none;
-            background: none;
-            border: 1px solid $main-font-color;
-            border-left: none;
-            border-right: none;
-            height: 30px;
-
-            &:hover {
-                background-color: #333;
-            }
-        }
-
-        .prev {
-            float: left;
-        }
-
-        .next {
-            float: right;
-        }
-    }
+    max-height: 500px;
+    overflow-y: auto;
     .post {
+        font-family: sans-serif;
+        word-spacing:0.08em;
         position:relative;
         min-height: 90px;
         margin-bottom: 10px;
@@ -111,10 +124,10 @@ $video-list-width: $right-pane-width;
             width: $thumbnail-width;
         }
 
-        $title-margin-left: $thumbnail-width + 10px;;
         .title {
-            margin-left: $title-margin-left;
-            width: $video-list-width - $title-margin-left;
+            width: $video-list-width - $thumbnail-width - 20px;
+            margin-left: $thumbnail-width;
+            padding: 0 10px;
             font-size: 16px;
             line-height: 22px;
         }
