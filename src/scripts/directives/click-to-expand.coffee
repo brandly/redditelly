@@ -22,6 +22,11 @@ angular.module('redditelly.directives')
 
             scope.$on '$destroy', ->
                 el.off 'click'
+
+            if attrs.collapseOn
+                scope.$on attrs.collapseOn, ->
+                    unless collapsed
+                        setCollapsed true
     }
 
 ]

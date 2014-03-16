@@ -3,7 +3,7 @@
   <div class="left-pane video-player">
     <youtube-player id="current-video" video-id="currentPost.url | getVideoIDfromURL"></youtube-player>
     <div class="video-info">
-      <h3 class="title" title="{{currentPost.title}}" click-to-expand>{{currentPost.title}}</h3>
+      <h3 class="title" title="{{currentPost.title}}" click-to-expand collapse-on="redditelly.post.change">{{currentPost.title}}</h3>
       <div class="details" ng-show="currentPost">
         +{{currentPost.ups - currentPost.downs}}
         <span class="divider">|</span>

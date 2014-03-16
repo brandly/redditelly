@@ -15,6 +15,7 @@ angular.module('redditelly')
 
     $scope.nextVideo = ->
         $scope.currentPost = getNextPost()
+        $scope.$broadcast 'redditelly.post.change'
 
     $scope.selectPost = (id) ->
         while $scope.currentPost?.id isnt id
