@@ -2,13 +2,30 @@
 <div class="page">
   <div class="left-pane video-player">
     <youtube-player id="current-video" video-id="currentPost.url | getVideoIDfromURL"></youtube-player>
-    <div class="details">
+    <div class="video-info">
       <h3 class="title" title="{{currentPost.title}}" click-to-expand>{{currentPost.title}}</h3>
+      <div class="details" ng-show="currentPost">
+        (+{{currentPost.ups}} / -{{currentPost.downs}})
+        <span class="divider">|</span>
+          <a href="http://reddit.com{{currentPost.permalink}}" target="_blank">
+            <ng-pluralize count="currentPost.num_comments"
+                          when="{'0': 'No comments',
+                                 '1': '1 comment',
+                                 'other': '{} comments'}">
+            </ng-pluralize>
+          </a>
+        <span class="divider">|</span>
+        {{currentPost.created | timeago}}
+        <span class="divider">|</span>
+        <a href="http://reddit.com/user/{{currentPost.author}}" target="_blank">
+          u/{{currentPost.author}}
+        </a>
+      </div>
     </div>
   </div>
 
   <div class="right-pane">
-    <div class="controls" ng-show="currentPost">
+    <div class="controls" ng-show="posts.length">
       <button ng-click="prevVideo()" class="prev">&lt;</button>
       <button ng-click="nextVideo()" class="next">&gt;</button>
     </div>
