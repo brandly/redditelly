@@ -18,5 +18,7 @@ angular.module('redditelly.services')
         getPostById: (id) ->
             $http.get(postUrl(id)).then (response) ->
                 response.data.data.children[0]?.data
+            , (response) ->
+                throw response.data
     }
 ]

@@ -6,19 +6,29 @@ angular.module('redditelly')
     $scope.posts = null
     $scope.currentPost = null
 
+    # we only know how to youtube, currently
+    validPost = (post) ->
+        (post.domain is 'youtube.com')
+
     if linkedToPost
+        # in case anything goes wrong
+        jkInvalidPost = ->
+            linkedToPost = false
+            if $scope.posts?.length
+                $scope.nextVideo()
+
         id = $stateParams.v
         $reddit.getPostById(id).then (post) ->
-            $scope.currentPost = post
-        , (e) ->
-            # clear state params
-            # call next video if we have them
-            # otherwise, somehow let the video list know to call
+            if validPost post
+                $scope.currentPost = post
+            else
+                jkInvalidPost()
+        , jkInvalidPost
 
     $reddit.get($stateParams.r).then (posts) ->
         console.log 'POSTS', posts
-        $scope.posts = posts.filter (post) ->
-            post.domain is 'youtube.com'
+        $scope.posts = posts.filter validPost
+
         unless linkedToPost
             $scope.nextVideo()
 
