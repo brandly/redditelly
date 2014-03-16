@@ -19,7 +19,8 @@ angular.module('redditelly', dependencies).config(['$stateProvider', '$urlRouter
             controller: 'AppCtrl'
 
         .state 'subreddit',
-            url: '/r/:r'
+            # 'v' for the post id
+            url: '/r/:r?v'
             templateUrl: 'views/subreddit.html'
             controller: 'SubredditCtrl'
 
