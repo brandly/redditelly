@@ -2,9 +2,8 @@ angular.module('redditelly.filters')
 
 .filter 'timeago', ->
     return (input) ->
-
+        date = input * 1000
         nowTime = (new Date()).getTime()
-        date = (new Date(input * 1000)).getTime()
         dateDifference = nowTime - date
 
         seconds = Math.abs(dateDifference) / 1000
