@@ -64,7 +64,7 @@ gulp.task('views', function () {
 });
 
 gulp.task('sass', function () {
-    return gulp.src('src/styles/**/*.scss')
+    return gulp.src('src/styles/style.scss')
         .pipe(sass())
         .on('error', gutil.log)
         .pipe(minify())

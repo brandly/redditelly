@@ -1,0 +1,9 @@
+.click-to-expand {
+    cursor: pointer;
+}
+
+.collapsed {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

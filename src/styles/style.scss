@@ -1,3 +1,6 @@
+@import 'reset';
+@import 'click-to-expand';
+
 $main-font-color: #ddd;
 
 $page-width: 1040px;
@@ -108,11 +111,11 @@ header {
 $video-list-width: $right-pane-width;
 .video-list {
     width: $video-list-width;
-    max-height: 500px;
     overflow-y: auto;
+    overflow-x: hidden;
     .post {
         font-family: sans-serif;
-        word-spacing:0.08em;
+        word-spacing: 0.08em;
         position:relative;
         min-height: 90px;
         margin-bottom: 10px;
@@ -129,7 +132,7 @@ $video-list-width: $right-pane-width;
             margin-left: $thumbnail-width;
             padding: 0 10px;
             font-size: 16px;
-            line-height: 22px;
+            line-height: 20px;
         }
     }
 }
