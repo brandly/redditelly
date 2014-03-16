@@ -6,9 +6,11 @@ angular.module('redditelly')
     $scope.posts = null
     $scope.currentPost = null
 
-    # we only know how to youtube, currently
     validPost = (post) ->
-        (post.domain is 'youtube.com')
+        # when switching subreddits,
+        # the post might be leftover from a different subreddit.
+        # we only know how to youtube, currently.
+        (post.domain is 'youtube.com') and (post.subreddit is $scope.currentSubreddit)
 
     if linkedToPost
         # in case anything goes wrong
@@ -55,7 +57,7 @@ angular.module('redditelly')
         $state.go 'subreddit', {
             r: $stateParams.r
             v: $scope.currentPost.id
-        },  {
+        }, {
             location: true
             reload: false
             notify: false
