@@ -13,18 +13,13 @@ dependencies = [
 angular.module('redditelly', dependencies).config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) ->
     $stateProvider
 
-        .state 'app',
-            url: '/'
-            templateUrl: 'views/app.html'
-            controller: 'AppCtrl'
-
         .state 'subreddit',
             # 'v' for the post id
             url: '/r/:r?v'
             templateUrl: 'views/subreddit.html'
             controller: 'SubredditCtrl'
 
-        $urlRouterProvider.otherwise '/'
+        $urlRouterProvider.otherwise '/r/videos'
 
 ]).run(['$rootScope', ($rootScope) ->
     $rootScope.$on '$stateChangeSuccess', (e, toState, toParams) ->
