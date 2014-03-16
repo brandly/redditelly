@@ -15,7 +15,7 @@
             </ng-pluralize>
           </a>
         <span class="divider">|</span>
-        {{currentPost.created | timeago}}
+        {{currentPost.created_utc | timeago}}
         <span class="divider">|</span>
         <a href="http://reddit.com/user/{{currentPost.author}}" target="_blank">
           u/{{currentPost.author}}
