@@ -12,18 +12,20 @@ angular.module('redditelly')
             'youtubehaiku'
             'video'
             'youtube'
+            'kidsafevideos'
         ]
     }, {
         name: 'music'
         list: [
-            # 'music'
+            'music'
             'listentothis'
+            'hiphopheads'
             'amv'
         ]
     }, {
         name: 'film & tv'
         list: [
-            # 'documentaries'
+            'documentaries'
             'fullmoviesonyoutube'
             'television'
         ]
@@ -37,7 +39,7 @@ angular.module('redditelly')
         name: 'games'
         list: [
             'gaming'
-            # 'games'
+            'games'
         ]
     }]
 
