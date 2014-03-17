@@ -22,6 +22,7 @@ angular.module('redditelly')
             'hiphopheads'
             'amv'
             'classicalmusic'
+            'under10k'
         ]
     }, {
         name: 'film & tv'
