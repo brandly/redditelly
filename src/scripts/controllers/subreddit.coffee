@@ -10,7 +10,7 @@ angular.module('redditelly')
         # when switching subreddits,
         # the post might be leftover from a different subreddit.
         # we only know how to youtube, currently.
-        (post.domain is 'youtube.com') and (post.subreddit is $scope.currentSubreddit)
+        (post.domain is 'youtube.com') and (post.subreddit.toLowerCase() is $scope.currentSubreddit)
 
     if linkedToPost
         # in case anything goes wrong
@@ -55,7 +55,7 @@ angular.module('redditelly')
         # https://github.com/angular-ui/ui-router/wiki/Quick-Reference#state-1
         $state.go 'subreddit', {
             r: $stateParams.r
-            v: $scope.currentPost.id
+            v: $scope.currentPost?.id
         }, {
             location: true
             reload: false
