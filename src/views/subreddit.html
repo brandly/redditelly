@@ -1,6 +1,17 @@
 
 <div class="page">
-  <div class="left-pane video-player">
+  <div class="pick-subreddit" ng-if="pickingSubreddit">
+    <div ng-repeat="category in categories" class="category">
+      <h2 class="category-name">{{category.name}}</h2>
+      <ul class="subreddit-list">
+        <li class="subreddit" ng-repeat="subreddit in category.list" ng-click="goTo(subreddit)">
+          r/{{subreddit}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="left-pane video-player" ng-class="{'slide-over': pickingSubreddit}">
     <youtube-player id="current-video" video-id="currentPost.url | getVideoIDfromURL"></youtube-player>
     <div class="video-info">
       <h3 class="title" title="{{currentPost.title}}" click-to-expand collapse-on="redditelly.post.change">{{currentPost.title}}</h3>
@@ -24,7 +35,7 @@
     </div>
   </div>
 
-  <div class="right-pane">
+  <div class="right-pane" ng-hide="pickingSubreddit">
     <div class="controls" ng-show="posts.length">
       <button ng-click="prevVideo()" class="prev">&lt;</button>
       <button ng-click="nextVideo()" class="next">&gt;</button>

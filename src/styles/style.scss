@@ -9,6 +9,14 @@ $left-pane-width: 640px;
 $right-pane-width: $page-width - $left-pane-width - $space-between-panes;
 $thin-border: 1px solid $main-font-color;
 
+@mixin transform($value) {
+  -webkit-transform: $value;
+     -moz-transform: $value;
+      -ms-transform: $value;
+       -o-transform: $value;
+          transform: $value;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -46,6 +54,17 @@ header {
     $header-height: 102px;
     height: $header-height;
     padding: 10px 0;
+
+    [ng-click] {
+        &:hover {
+            border-bottom: 2px solid $main-font-color;
+        }
+
+        &.selected {
+            color: darken($main-font-color, 60%);
+            border-bottom: 2px solid $main-font-color;
+        }
+    }
 
     .subreddit {
         font-size: 24px;
@@ -154,6 +173,42 @@ $video-list-width: $right-pane-width;
             padding: 0 10px;
             font-size: 16px;
             line-height: 20px;
+        }
+    }
+}
+
+.slide-over {
+    @include transform(translateX($right-pane-width + $space-between-panes));
+}
+
+.pick-subreddit {
+    width: $right-pane-width;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 10px;
+    border-right: $thin-border;
+
+    .category {
+        margin-bottom: 10px;
+    }
+
+    .category-name {
+        font-size: 18px;
+        line-height: 32px;
+    }
+
+    .subreddit-list {
+        padding-left: 10px;
+    }
+
+    .subreddit {
+        font-family: sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 }

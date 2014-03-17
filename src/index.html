@@ -19,10 +19,10 @@
     </script>
 
   </head>
-  <body>
+  <body ng-controller="RedditellyCtrl">
     <header class="page">
       <div class="left-pane">
-        <h2 class="subreddit" ng-cloak ng-if="currentSubreddit">r/{{currentSubreddit}}</h2>
+        <h2 class="subreddit" ng-cloak ng-show="currentSubreddit">r/<span ng-click="pickingSubreddit = !pickingSubreddit;" ng-class="{selected: pickingSubreddit}">{{currentSubreddit}}</span></h2>
       </div>
       <div class="right-pane">
         <img class="redditelly-head" src="img/redditelly-head-straight.svg" alt="redditelly"></img>
