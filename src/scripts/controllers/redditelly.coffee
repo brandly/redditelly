@@ -21,6 +21,7 @@ angular.module('redditelly')
             'listentothis'
             'hiphopheads'
             'amv'
+            'classicalmusic'
         ]
     }, {
         name: 'film & tv'
