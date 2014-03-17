@@ -1,7 +1,10 @@
 @import 'reset';
 @import 'click-to-expand';
 
-$main-font-color: #ddd;
+$light-gray: #ddd;
+$medium-gray: #888;
+
+$main-font-color: $light-gray;
 
 $page-width: 1040px;
 $space-between-panes: 20px;
@@ -61,7 +64,7 @@ header {
         }
 
         &.selected {
-            color: darken($main-font-color, 60%);
+            color: $medium-gray;
             border-bottom: 2px solid $main-font-color;
         }
     }
@@ -117,7 +120,7 @@ header {
     }
 
     .divider {
-        color: #888;
+        color: $medium-gray;
     }
 }
 
@@ -130,8 +133,8 @@ header {
         outline: none;
         background: none;
         border: none;
-        border-top: $thin-border;
-        border-bottom: $thin-border;
+        border-top: 1px solid $medium-gray;
+        border-bottom: 1px solid $medium-gray;
         height: 30px;
 
         &:hover {
@@ -149,6 +152,7 @@ header {
 }
 
 $video-list-width: $right-pane-width;
+$thumbnail-width: 120px;
 .video-list {
     width: $video-list-width;
     overflow-y: auto;
@@ -159,43 +163,62 @@ $video-list-width: $right-pane-width;
         position:relative;
         min-height: 90px;
         margin-bottom: 10px;
-        $thumbnail-width: 120px;
+    }
 
-        .thumbnail {
-            position: absolute;
-            left: 0;
-            width: $thumbnail-width;
-        }
+    .thumbnail {
+        position: absolute;
+        left: 0;
+        width: $thumbnail-width;
+    }
 
-        .title {
-            width: $video-list-width - $thumbnail-width - 20px;
-            margin-left: $thumbnail-width;
-            padding: 0 10px;
-            font-size: 16px;
-            line-height: 20px;
-        }
+    .title {
+        width: $video-list-width - $thumbnail-width - 20px;
+        margin-left: $thumbnail-width;
+        padding: 0 10px;
+        font-size: 16px;
+        line-height: 20px;
     }
 }
 
-.slide-over {
-    @include transform(translateX($right-pane-width + $space-between-panes));
+$subreddit-picker-width: $right-pane-width - $thumbnail-width - $space-between-panes;
+.picking-subreddit {
+    .video-picker, .video-player {
+        @include transform(translateX($subreddit-picker-width + $space-between-panes));
+    }
+
+    .right-pane, .video-picker {
+        width: $thumbnail-width;
+        overflow-x: hidden;
+    }
+
+    .video-list {
+        .title {
+            display: none;
+        }
+
+        .post {
+            width: $thumbnail-width;
+        }
+    }
+
 }
 
-.pick-subreddit {
-    width: $right-pane-width;
+.subreddit-picker {
+    width: $subreddit-picker-width;
     position: absolute;
     top: 0;
     left: 0;
     padding-left: 10px;
-    border-right: $thin-border;
+    border-right: 1px solid $medium-gray;
 
     .category {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 
     .category-name {
         font-size: 18px;
         line-height: 32px;
+        color: $medium-gray;
     }
 
     .subreddit-list {
