@@ -54,7 +54,7 @@ a {
 }
 
 header {
-    $header-height: 102px;
+    $header-height: 98px;
     height: $header-height;
     padding: 10px 0;
 
@@ -77,15 +77,15 @@ header {
     }
 
     .title {
-        font-size: 54px;
+        font-size: 60px;
         line-height: $header-height;
         text-align: right;
     }
 
-    $head-width: 100px;
+    $head-width: 90px;
     $head-height: $head-width;
     .redditelly-head {
-        float: left;
+        position: absolute;
         width: $head-width;
         height: $head-height;
     }
