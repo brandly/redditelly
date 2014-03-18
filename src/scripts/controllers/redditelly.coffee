@@ -38,6 +38,12 @@ angular.module('redditelly')
             'nba'
         ]
     }, {
+        name: 'cats'
+        list: [
+            'catvideos'
+            'catpranks'
+        ]
+    }, {
         name: 'games'
         list: [
             'gaming'
