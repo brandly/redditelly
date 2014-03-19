@@ -27,9 +27,7 @@ factory('keypressHelper', ['$parse', '$document', function keypress($parse, $doc
   };
 
   return function(mode, scope, elm, attrs) {
-    console.log('LINKING');
     if (attrs.uiGlobalKeys !== undefined) {
-      console.log('GLOBAL!');
       elm = $document;
       scope.$on('$destroy', function () {
         elm.unbind(mode);
@@ -104,7 +102,6 @@ factory('keypressHelper', ['$parse', '$document', function keypress($parse, $doc
 angular.module('ui.keypress').directive('uiKeydown', ['keypressHelper', function(keypressHelper){
   return {
     link: function (scope, elm, attrs) {
-      console.log('LINKING TO KEYDOWN', scope);
       keypressHelper('keydown', scope, elm, attrs);
     }
   };
