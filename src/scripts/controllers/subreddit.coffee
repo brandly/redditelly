@@ -48,6 +48,10 @@ angular.module('redditelly')
         $scope.nextVideo()
 
     $scope.$on 'youtube.player.ready', ->
+        time = $youtube.getTimeFromURL $scope.currentPost.url
+        if time?
+            $youtube.player.seekTo time, true
+
         $youtube.player.playVideo()
 
     $scope.$on 'redditelly.post.change', ->
