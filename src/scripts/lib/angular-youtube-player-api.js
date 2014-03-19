@@ -168,7 +168,7 @@ angular.module('youtube', ['ng']).run(function () {
 
     return service;
 }])
-.directive('youtubePlayer', ['$youtube', function ($youtube) {
+.directive('youtubeVideo', ['$youtube', function ($youtube) {
     return {
         restrict: 'EA',
         scope: {
@@ -181,7 +181,12 @@ angular.module('youtube', ['ng']).run(function () {
 
             // Allow us to watch 'player.ready'
             scope.player = $youtube;
-            var stopWatchingReady = scope.$watch('player.ready',
+            var stopWatchingReady = scope.$watch(
+                function () {
+                    return scope.player.ready
+                        && (typeof scope.videoUrl !== 'undefined'
+                        ||  typeof scope.videoIdid !== 'undefined');
+                },
                 function (ready) {
                     if (ready) {
                         stopWatchingReady();
