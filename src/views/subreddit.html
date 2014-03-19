@@ -43,7 +43,9 @@
     <ul class="video-list">
       <li class="post" ng-repeat="post in posts" ng-click="selectPost(post.id)" title="{{post.title}}">
         <img class="thumbnail" ng-src="{{post.url | getVideoIDfromURL | idToThumbnail}}">
-        <h4 class="title">{{post.title}}</h4>
+        <div class="info">
+          <h4 class="title">{{post.title}}</h4>
+        </div>
       </li>
     </ul>
   </div>

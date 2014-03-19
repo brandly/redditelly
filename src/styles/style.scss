@@ -158,15 +158,21 @@ $thumbnail-width: 120px;
     overflow-y: auto;
     overflow-x: hidden;
     .post {
-        font-family: sans-serif;
-        word-spacing: 0.08em;
-        position:relative;
+        font-family: arial, sans-serif;
+        word-spacing: 0.04em;
+        position: relative;
         min-height: 90px;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
 
         &:hover {
             border-right: 1px solid $medium-gray;
         }
+    }
+
+    .info {
+        margin-left: $thumbnail-width;
+        width: $video-list-width - $thumbnail-width - 20px;
+        padding: 0 10px;
     }
 
     .thumbnail {
@@ -176,11 +182,9 @@ $thumbnail-width: 120px;
     }
 
     .title {
-        width: $video-list-width - $thumbnail-width - 20px;
-        margin-left: $thumbnail-width;
-        padding: 0 10px;
-        font-size: 16px;
-        line-height: 20px;
+        font-weight: bold;
+        font-size: 13px;
+        line-height: 18px;
     }
 }
 
