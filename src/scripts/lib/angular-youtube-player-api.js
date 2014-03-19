@@ -83,6 +83,10 @@ angular.module('youtube', ['ng']).run(function () {
             // returns ['t=46', '46']
             var times = url.match(timeRegexp);
 
+            if (!times) {
+                return undefined;
+            }
+
             // assume the first
             var minutes = times[1],
                 seconds = times[2];
