@@ -3,8 +3,6 @@ angular.module('redditelly')
 .controller 'RedditellyCtrl', ['$scope', '$state', ($scope, $state) ->
     $scope.pickingSubreddit = false
 
-    # routing is breaking on commented out ones
-    # doing something wrong in subreddit.coffee
     $scope.categories = [{
         name: 'general'
         list: [
@@ -29,6 +27,8 @@ angular.module('redditelly')
         list: [
             'documentaries'
             'fullmoviesonyoutube'
+            'movietrailers'
+            'trailers'
             'television'
         ]
     }, {
