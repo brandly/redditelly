@@ -12,9 +12,14 @@ angular.module('youtube', ['ng']).run(function () {
 .service('$youtube', ['$window', '$rootScope', function ($window, $rootScope) {
     // adapted from http://stackoverflow.com/a/5831191/1614967
     var youtubeRegexp = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig;
+    var timeRegexp = /t=(\d+[ms]?)(\d+s)?/;
 
     function contains (str, substr) {
         return (str.indexOf(substr) > -1);
+    }
+
+    function stripLastCharacter (str) {
+        return str.slice(0, (str.length - 1));
     }
 
     var service = {
@@ -65,6 +70,37 @@ angular.module('youtube', ['ng']).run(function () {
             }
 
             return id;
+        },
+
+        getTimeFromURL: function (url) {
+            url || (url = '');
+
+            // t=4m20s
+            // returns ['t=4m20s', '4m', '20s']
+            // t=46s
+            // returns ['t=46s', '46s']
+            // t=46
+            // returns ['t=46', '46']
+            var times = url.match(timeRegexp);
+
+            // assume the first
+            var minutes = times[1],
+                seconds = times[2];
+
+            if (typeof seconds !== 'undefined') {
+                seconds = parseInt(stripLastCharacter(seconds), 10);
+                minutes = parseInt(stripLastCharacter(minutes), 10);
+
+            } else { // we were wrong :(
+                if (minutes[minutes.length - 1] === 's') {
+                    minutes = stripLastCharacter(minutes);
+                }
+                seconds = parseInt(minutes, 10);
+                minutes = 0;
+            }
+
+            // in seconds
+            return seconds + (minutes * 60);
         },
 
         createPlayer: function () {
