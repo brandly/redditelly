@@ -5,6 +5,7 @@ angular.module('redditelly')
 
     $scope.posts = null
     $scope.currentPost = null
+    $scope.history = []
 
     validPost = (post) ->
         # when switching subreddits,
@@ -34,6 +35,8 @@ angular.module('redditelly')
             $scope.nextVideo()
 
     getNextPost = ->
+        if $scope.currentPost?
+            $scope.history.push $scope.currentPost
         $scope.posts.shift()
 
     $scope.nextVideo = ->
@@ -54,17 +57,20 @@ angular.module('redditelly')
 
         $youtube.player.playVideo()
 
-    $scope.$on 'redditelly.post.change', ->
+    setURL = (subreddit, post={}) ->
         # update 'v' in query string
         # https://github.com/angular-ui/ui-router/wiki/Quick-Reference#state-1
         $state.go 'subreddit', {
-            r: $stateParams.r
-            v: $scope.currentPost?.id
+            r: subreddit
+            v: post.id
         }, {
             location: true
             reload: false
             notify: false
         }
+
+    $scope.$on 'redditelly.post.change', ->
+        setURL $stateParams.r, $scope.currentPost
 
     $scope.preventDefault = (e) ->
         e.preventDefault()
