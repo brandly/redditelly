@@ -12,7 +12,7 @@
   </div>
 
   <div class="left-pane video-player">
-    <youtube-player id="current-video" video-id="currentPost.url | getVideoIDfromURL"></youtube-player>
+    <youtube-video id="current-video" video-url="currentPost.url"></youtube-video>
     <div class="video-info">
       <h3 class="title" title="{{currentPost.title}}" click-to-expand collapse-on="redditelly.post.change">{{currentPost.title}}</h3>
       <div class="details" ng-show="currentPost">
@@ -36,14 +36,21 @@
   </div>
 
   <div class="right-pane video-picker">
-    <div class="controls" ng-show="posts.length">
+    <div class="controls" ng-show="posts.length" ui-global-keys ui-keydown="{'left': 'prevVideo() && preventDefault($event)', 'right': 'nextVideo() && preventDefault($event)'}">
       <button ng-click="prevVideo()" class="prev">&lt;</button>
       <button ng-click="nextVideo()" class="next">&gt;</button>
     </div>
     <ul class="video-list">
       <li class="post" ng-repeat="post in posts" ng-click="selectPost(post.id)" title="{{post.title}}">
         <img class="thumbnail" ng-src="{{post.url | getVideoIDfromURL | idToThumbnail}}">
-        <h4 class="title">{{post.title}}</h4>
+        <div class="info">
+          <h4 class="title">{{post.title}}</h4>
+          <span class="details">
+            +{{post.ups - post.downs}}
+            <span class="divider">|</span>
+            {{post.created_utc | timeago}}
+          </span>
+        </div>
       </li>
     </ul>
   </div>
