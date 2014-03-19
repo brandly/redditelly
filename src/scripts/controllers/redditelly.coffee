@@ -30,6 +30,7 @@ angular.module('redditelly')
             'movietrailers'
             'trailers'
             'television'
+            'standupcomedy'
         ]
     }, {
         name: 'sports'
@@ -48,6 +49,12 @@ angular.module('redditelly')
         list: [
             'gaming'
             'games'
+        ]
+    }, {
+        name: 'learn'
+        list: [
+            'lectures'
+            'interview'
         ]
     }]
 
