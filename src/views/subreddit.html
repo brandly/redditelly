@@ -45,6 +45,11 @@
         <img class="thumbnail" ng-src="{{post.url | getVideoIDfromURL | idToThumbnail}}">
         <div class="info">
           <h4 class="title">{{post.title}}</h4>
+          <span class="details">
+            +{{post.ups - post.downs}}
+            <span class="divider">|</span>
+            {{post.created_utc | timeago}}
+          </span>
         </div>
       </li>
     </ul>

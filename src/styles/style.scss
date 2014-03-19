@@ -186,6 +186,11 @@ $thumbnail-width: 120px;
         font-size: 13px;
         line-height: 18px;
     }
+
+    .details {
+        color: $medium-gray;
+        font-size: 12px;
+    }
 }
 
 $subreddit-picker-width: $right-pane-width - $thumbnail-width - $space-between-panes;
