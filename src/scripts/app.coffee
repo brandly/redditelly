@@ -7,6 +7,7 @@ dependencies = [
     'redditelly.filters'
     'redditelly.directives'
     'ui.router'
+    'ui.keypress'
     'youtube'
 ]
 

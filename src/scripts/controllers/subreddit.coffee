@@ -65,4 +65,7 @@ angular.module('redditelly')
             reload: false
             notify: false
         }
+
+    $scope.preventDefault = (e) ->
+        e.preventDefault()
 ]
