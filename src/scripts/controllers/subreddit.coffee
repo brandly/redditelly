@@ -8,6 +8,7 @@ angular.module('redditelly')
     $scope.history = []
     $scope.lastPostId = null
     $scope.noMorePosts = null
+    $scope.loadingPosts = false
 
     validPost = (post) ->
         # when switching subreddits,
@@ -15,11 +16,16 @@ angular.module('redditelly')
         # we only know how to youtube, currently.
         (post.domain is 'youtube.com') and (post.subreddit.toLowerCase() is $scope.currentSubreddit)
 
+    ensureEnoughPosts = ->
+        if $scope.posts.length < 8 and not $scope.noMorePosts
+            $scope.getMorePosts()
+
     updateLocalPosts = (posts=[]) ->
         $scope.lastPostId = if posts?.length then posts[posts.length - 1].id else null
         acceptedPosts = posts.filter validPost
         $scope.posts = $scope.posts.concat acceptedPosts
         $scope.noMorePosts = acceptedPosts.length < 1
+        ensureEnoughPosts()
 
     if linkedToPost
         # in case anything goes wrong
@@ -35,7 +41,9 @@ angular.module('redditelly')
                 jkInvalidPost()
         , jkInvalidPost
 
+    $scope.loadingPosts = true
     $reddit.get($stateParams.r).then (posts) ->
+        $scope.loadingPosts = false
         updateLocalPosts posts
 
         unless linkedToPost
@@ -43,7 +51,9 @@ angular.module('redditelly')
 
     $scope.getMorePosts = ->
         return if $scope.noMorePosts
+        $scope.loadingPosts = true
         $reddit.getAfter($stateParams.r, $scope.lastPostId).then (posts) ->
+            $scope.loadingPosts = false
             updateLocalPosts posts
 
     getNextPost = ->
@@ -83,6 +93,7 @@ angular.module('redditelly')
 
     $scope.$on 'redditelly.post.change', ->
         setURL $stateParams.r, $scope.currentPost
+        ensureEnoughPosts()
 
     $scope.preventDefault = (e) ->
         e.preventDefault()

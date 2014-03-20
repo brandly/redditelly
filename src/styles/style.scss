@@ -5,6 +5,7 @@ $light-gray: #ddd;
 $medium-gray: #888;
 
 $main-font-color: $light-gray;
+$body-background-color: #222;
 
 $page-width: 1040px;
 $space-between-panes: 20px;
@@ -28,7 +29,7 @@ body {
     overflow-y: scroll;
     color: $main-font-color;
     font-family: 'Sintony', sans-serif;
-    background-color: #222;
+    background-color: $body-background-color;
 }
 
 a {
@@ -124,6 +125,13 @@ header {
     }
 }
 
+.cap {
+    border-top: 1px solid $medium-gray;
+    border-bottom: 1px solid $medium-gray;
+    height: 30px;
+    margin-bottom: 15px;
+}
+
 .controls {
     height: 30px;
     margin-bottom: 15px;
@@ -135,8 +143,6 @@ header {
         outline: none;
         background: none;
         border: none;
-        border-top: 1px solid $medium-gray;
-        border-bottom: 1px solid $medium-gray;
 
         &:hover {
             background-color: #333;
@@ -149,6 +155,26 @@ header {
 
     .next {
         float: right;
+    }
+}
+
+.more-posts {
+    text-align: center;
+    line-height: 30px;
+
+    &:hover {
+        background-color: #333;
+    }
+
+    &.disabled {
+        &:hover {
+            background-color: $body-background-color;
+        }
+    }
+
+    .loading-msg {
+        color: $medium-gray;
+        font-size: 14px;
     }
 }
 

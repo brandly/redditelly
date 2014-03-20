@@ -36,7 +36,7 @@
   </div>
 
   <div class="right-pane video-picker">
-    <div class="controls" ng-show="posts.length" ui-global-keys ui-keydown="{'left': 'prevVideo() && preventDefault($event)', 'right': 'nextVideo() && preventDefault($event)'}">
+    <div class="cap controls" ng-show="posts.length" ui-global-keys ui-keydown="{'left': 'prevVideo() && preventDefault($event)', 'right': 'nextVideo() && preventDefault($event)'}">
       <button ng-click="prevVideo()" class="prev">&lt;</button>
       <button ng-click="nextVideo()" class="next">&gt;</button>
     </div>
@@ -53,5 +53,8 @@
         </div>
       </li>
     </ul>
+    <div class="cap more-posts" ng-click="getMorePosts()" ng-class="{disabled: loadingPosts}">
+      <span ng-hide="loadingPosts">more</span>
+      <span class="loading-msg" ng-show="loadingPosts">loading...</span>
   </div>
 </div>
