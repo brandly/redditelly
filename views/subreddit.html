@@ -20,7 +20,7 @@
         <span class="divider">|</span>
           <a href="http://reddit.com{{currentPost.permalink}}" target="_blank">
             <ng-pluralize count="currentPost.num_comments"
-                          when="{'0': 'No comments',
+                          when="{'0': 'no comments',
                                  '1': '1 comment',
                                  'other': '{} comments'}">
             </ng-pluralize>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="right-pane video-picker">
-    <div class="controls" ng-show="posts.length" ui-global-keys ui-keydown="{'left': 'prevVideo() && preventDefault($event)', 'right': 'nextVideo() && preventDefault($event)'}">
+    <div class="cap controls" ng-show="posts.length && !noMorePosts" ui-global-keys ui-keydown="{'left': 'prevVideo() && preventDefault($event)', 'right': 'nextVideo() && preventDefault($event)'}">
       <button ng-click="prevVideo()" class="prev">&lt;</button>
       <button ng-click="nextVideo()" class="next">&gt;</button>
     </div>
@@ -53,5 +53,10 @@
         </div>
       </li>
     </ul>
+    <div class="cap more-posts" ng-click="getMorePosts()" ng-class="{disabled: loadingPosts}" ng-hide="noMorePosts">
+      <span ng-hide="loadingPosts">more</span>
+      <span class="loading-msg" ng-show="loadingPosts">loading...</span>
+    </div>
+    <div class="cap no-more-posts" ng-show="noMorePosts">no more :(</div>
   </div>
 </div>
