@@ -125,9 +125,11 @@ header {
 }
 
 .controls {
-    height: 40px;
+    height: 30px;
+    margin-bottom: 15px;
 
     .next, .prev {
+        height: 100%;
         width: 50%;
         color: $main-font-color;
         outline: none;
@@ -135,7 +137,6 @@ header {
         border: none;
         border-top: 1px solid $medium-gray;
         border-bottom: 1px solid $medium-gray;
-        height: 30px;
 
         &:hover {
             background-color: #333;
