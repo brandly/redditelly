@@ -78,6 +78,7 @@ angular.module('redditelly')
             $youtube.player.seekTo time, true
 
         $youtube.player.playVideo()
+        ga('send', 'event', 'Video', 'Play', $stateParams.r)
 
     setURL = (subreddit, post={}) ->
         # update 'v' in query string
