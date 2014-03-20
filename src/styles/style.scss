@@ -227,8 +227,12 @@ $thumbnail-width: 120px;
 
 $subreddit-picker-width: $right-pane-width - $thumbnail-width - $space-between-panes;
 .picking-subreddit {
-    .video-picker, .video-player {
-        @include transform(translateX($subreddit-picker-width + $space-between-panes));
+    .video-picker {
+        margin-left: $subreddit-picker-width + $left-pane-width + $space-between-panes * 2;
+    }
+
+    .video-player {
+        margin-left: $subreddit-picker-width + $space-between-panes;
     }
 
     .right-pane, .video-picker {
