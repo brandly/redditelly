@@ -3,15 +3,23 @@ angular.module('redditelly')
 .controller 'SubredditCtrl', ['$scope', '$stateParams', '$state', '$reddit', '$youtube', ($scope, $stateParams, $state, $reddit, $youtube) ->
     linkedToPost = $stateParams.v?
 
-    $scope.posts = null
+    $scope.posts = []
     $scope.currentPost = null
     $scope.history = []
+    $scope.lastPostId = null
+    $scope.noMorePosts = null
 
     validPost = (post) ->
         # when switching subreddits,
         # the post might be leftover from a different subreddit.
         # we only know how to youtube, currently.
         (post.domain is 'youtube.com') and (post.subreddit.toLowerCase() is $scope.currentSubreddit)
+
+    updateLocalPosts = (posts=[]) ->
+        $scope.lastPostId = if posts?.length then posts[posts.length - 1].id else null
+        acceptedPosts = posts.filter validPost
+        $scope.posts = $scope.posts.concat acceptedPosts
+        $scope.noMorePosts = acceptedPosts.length < 1
 
     if linkedToPost
         # in case anything goes wrong
@@ -28,11 +36,15 @@ angular.module('redditelly')
         , jkInvalidPost
 
     $reddit.get($stateParams.r).then (posts) ->
-        console.log 'POSTS', posts
-        $scope.posts = posts.filter validPost
+        updateLocalPosts posts
 
         unless linkedToPost
             $scope.nextVideo()
+
+    $scope.getMorePosts = ->
+        return if $scope.noMorePosts
+        $reddit.getAfter($stateParams.r, $scope.lastPostId).then (posts) ->
+            updateLocalPosts posts
 
     getNextPost = ->
         if $scope.currentPost?
