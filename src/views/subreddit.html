@@ -5,7 +5,7 @@
       <h2 class="category-name">{{category.name}}</h2>
       <ul class="subreddit-list">
         <li class="subreddit" ng-repeat="subreddit in category.list" ng-click="goTo(subreddit)">
-          r/{{subreddit}}
+          {{subreddit}}
         </li>
       </ul>
     </div>
