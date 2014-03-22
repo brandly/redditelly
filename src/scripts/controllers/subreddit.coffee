@@ -10,11 +10,12 @@ angular.module('redditelly')
     $scope.noMorePosts = null
     $scope.loadingPosts = false
 
+    validDomains = ['youtube.com', 'youtu.be']
     validPost = (post) ->
         # when switching subreddits,
         # the post might be leftover from a different subreddit.
         # we only know how to youtube, currently.
-        (post.domain is 'youtube.com') and (post.subreddit.toLowerCase() is $scope.currentSubreddit)
+        (post.domain in validDomains) and (post.subreddit.toLowerCase() is $scope.currentSubreddit)
 
     ensureEnoughPosts = ->
         if $scope.posts.length < 8 and not $scope.noMorePosts
