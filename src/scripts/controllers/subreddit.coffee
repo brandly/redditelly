@@ -98,4 +98,13 @@ angular.module('redditelly')
 
     $scope.preventDefault = (e) ->
         e.preventDefault()
+
+    $scope.togglePlayer = ->
+        return unless $youtube.player?
+
+        if $youtube.currentState is 'playing'
+            $youtube.player.pauseVideo()
+        else
+            $youtube.player.playVideo()
+
 ]
