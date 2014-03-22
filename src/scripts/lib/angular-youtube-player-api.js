@@ -30,6 +30,8 @@ angular.module('youtube', ['ng']).run(function () {
         playerHeight: '390',
         playerWidth: '640',
 
+        currentState: null,
+
         setURL: function (url) {
             service.videoId = service.getIdFromURL(url);
         },
@@ -154,6 +156,7 @@ angular.module('youtube', ['ng']).run(function () {
         if (typeof state !== undefined) {
             applyBroadcast(eventPrefix + state);
         }
+        service.currentState = state;
     }
 
     // Youtube callback when API is ready
