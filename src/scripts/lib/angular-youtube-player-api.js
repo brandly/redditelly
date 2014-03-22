@@ -1,10 +1,5 @@
 angular.module('youtube', ['ng']).run(function () {
     var tag = document.createElement('script');
-
-    // This is a protocol-relative URL as described here:
-    //     http://paulirish.com/2010/the-protocol-relative-url/
-    // If you're testing a local page accessed via a file:/// URL, please set tag.src to
-    //     "https://www.youtube.com/iframe_api" instead.
     tag.src = "//www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -12,14 +7,10 @@ angular.module('youtube', ['ng']).run(function () {
 .service('$youtube', ['$window', '$rootScope', function ($window, $rootScope) {
     // adapted from http://stackoverflow.com/a/5831191/1614967
     var youtubeRegexp = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig;
-    var timeRegexp = /t=(\d+[ms]?)(\d+s)?/;
+    var timeRegexp = /t=(\d+)[ms]?(\d+)?s?/;
 
     function contains (str, substr) {
         return (str.indexOf(substr) > -1);
-    }
-
-    function stripLastCharacter (str) {
-        return str.slice(0, (str.length - 1));
     }
 
     var service = {
@@ -76,9 +67,9 @@ angular.module('youtube', ['ng']).run(function () {
             url || (url = '');
 
             // t=4m20s
-            // returns ['t=4m20s', '4m', '20s']
+            // returns ['t=4m20s', '4', '20']
             // t=46s
-            // returns ['t=46s', '46s']
+            // returns ['t=46s', '46']
             // t=46
             // returns ['t=46', '46']
             var times = url.match(timeRegexp);
@@ -88,17 +79,23 @@ angular.module('youtube', ['ng']).run(function () {
             }
 
             // assume the first
-            var minutes = times[1],
+            var full = times[0],
+                minutes = times[1],
                 seconds = times[2];
 
+            // t=4m20s
             if (typeof seconds !== 'undefined') {
-                seconds = parseInt(stripLastCharacter(seconds), 10);
-                minutes = parseInt(stripLastCharacter(minutes), 10);
+                seconds = parseInt(seconds, 10);
+                minutes = parseInt(minutes, 10);
 
-            } else { // we were wrong :(
-                if (minutes[minutes.length - 1] === 's') {
-                    minutes = stripLastCharacter(minutes);
-                }
+            // t=4m
+            } else if (contains(full, 'm')) {
+                minutes = parseInt(minutes, 10);
+                seconds = 0;
+
+            // t=4s
+            // t=4
+            } else {
                 seconds = parseInt(minutes, 10);
                 minutes = 0;
             }
@@ -185,7 +182,7 @@ angular.module('youtube', ['ng']).run(function () {
                 function () {
                     return scope.player.ready
                         && (typeof scope.videoUrl !== 'undefined'
-                        ||  typeof scope.videoIdid !== 'undefined');
+                        ||  typeof scope.videoId !== 'undefined');
                 },
                 function (ready) {
                     if (ready) {
