@@ -2,7 +2,7 @@
   "name": "redditelly",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "1.2.14",
+    "angular": "1.2.15",
     "lodash": "~2.4.1"
   },
   "private": true,
