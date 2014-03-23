@@ -6,6 +6,7 @@ angular.module('redditelly')
     $scope.posts = []
     $scope.currentPost = null
     $scope.previousPost = null
+    $scope.history = []
     $scope.lastPostId = null
     $scope.noMorePosts = null
     $scope.loadingPosts = false
@@ -58,11 +59,25 @@ angular.module('redditelly')
             updateLocalPosts posts
 
     getNextPost = ->
-        $scope.previousPost = $scope.currentPost
+        if $scope.previousPost
+            $scope.history.push $scope.previousPost
+        if $scope.currentPost
+            $scope.previousPost = $scope.currentPost
         $scope.posts.shift()
+
+    getPreviousPost = ->
+        if $scope.currentPost
+            $scope.posts.unshift $scope.currentPost
+        previous = $scope.previousPost
+        $scope.previousPost = $scope.history.pop()
+        return previous
 
     $scope.nextVideo = ->
         $scope.currentPost = getNextPost()
+        $scope.$broadcast 'redditelly.post.change'
+
+    $scope.prevVideo = ->
+        $scope.currentPost = getPreviousPost()
         $scope.$broadcast 'redditelly.post.change'
 
     $scope.selectPost = (id) ->

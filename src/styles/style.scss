@@ -129,6 +129,7 @@ header {
 .previous-video {
     font-family: arial, sans-serif;
     min-height: 100px;
+    margin-top: 40px;
 
     &:hover {
         border-right: 1px solid $medium-gray;
