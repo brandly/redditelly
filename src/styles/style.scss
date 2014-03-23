@@ -12,6 +12,7 @@ $space-between-panes: 20px;
 $left-pane-width: 640px;
 $right-pane-width: $page-width - $left-pane-width - $space-between-panes;
 $thin-border: 1px solid $main-font-color;
+$thumbnail-width: 120px;
 
 @mixin transform($value) {
   -webkit-transform: $value;
@@ -110,7 +111,7 @@ header {
     }
 
     .title {
-        font-size: 24px;
+        font-size: 18px;
         line-height: 32px;
         margin: 10px 0;
     }
@@ -121,6 +122,59 @@ header {
     }
 
     .divider {
+        color: $medium-gray;
+    }
+}
+
+.previous-video {
+    font-family: arial, sans-serif;
+    min-height: 100px;
+
+    &:hover {
+        border-right: 1px solid $medium-gray;
+    }
+
+    a {
+        color: $medium-gray;
+
+        &:hover {
+            color: $main-font-color;
+        }
+    }
+
+    .heading {
+        font-weight: bold;
+        color: $medium-gray;
+        font-size: 16px;
+        margin: 20px 10px;
+        margin-bottom: 10px;
+    }
+
+    .post {
+        position: relative;
+        margin: 10px;
+    }
+
+    .thumbnail {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: $thumbnail-width;
+    }
+
+    .title {
+        font-weight: bold;
+        word-spacing: 0.04em;
+        font-size: 13px;
+        line-height: 18px;
+        margin: 5px 0;
+    }
+
+    .info {
+        margin-left: $thumbnail-width + 10px;
+    }
+
+    .details {
         color: $medium-gray;
     }
 }
@@ -184,7 +238,6 @@ header {
 }
 
 $video-list-width: $right-pane-width;
-$thumbnail-width: 120px;
 .video-list {
     width: $video-list-width;
     overflow-y: auto;

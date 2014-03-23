@@ -5,7 +5,7 @@ angular.module('redditelly')
 
     $scope.posts = []
     $scope.currentPost = null
-    $scope.history = []
+    $scope.previousPost = null
     $scope.lastPostId = null
     $scope.noMorePosts = null
     $scope.loadingPosts = false
@@ -58,8 +58,7 @@ angular.module('redditelly')
             updateLocalPosts posts
 
     getNextPost = ->
-        if $scope.currentPost?
-            $scope.history.push $scope.currentPost
+        $scope.previousPost = $scope.currentPost
         $scope.posts.shift()
 
     $scope.nextVideo = ->
