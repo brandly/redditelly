@@ -12,3 +12,6 @@ indent_size = 2
 
 [**.coffee]
 indent_size = 4
+
+[**.sass]
+indent_size = 4
