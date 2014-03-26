@@ -122,4 +122,17 @@ angular.module('redditelly')
         else
             $youtube.player.playVideo()
 
+    truncate = (str, max) ->
+        if str.length > max
+            "#{str.substr(0, max - 3)}..."
+        else
+            str
+
+    $scope.getTweet = (post) ->
+        return '' unless post
+
+        url = "http://redditel.ly/#/#{post.subreddit}/#{post.id}"
+        space = ' '
+        title = truncate post.title, (140 - url.length - space.length)
+        "#{title}#{space}#{url}"
 ]
