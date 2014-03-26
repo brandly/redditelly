@@ -16,11 +16,11 @@ angular.module('redditelly', dependencies).config(['$stateProvider', '$urlRouter
 
         .state 'subreddit',
             # 'v' for the post id
-            url: '/r/:r?v'
+            url: '/:r/:v'
             templateUrl: 'views/subreddit.html'
             controller: 'SubredditCtrl'
 
-        $urlRouterProvider.otherwise '/r/videos'
+        $urlRouterProvider.otherwise '/youtubehaiku/hmm'
 
 ]).run(['$rootScope', ($rootScope) ->
     $rootScope.$on '$stateChangeSuccess', (e, toState, toParams) ->
