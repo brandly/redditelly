@@ -16,25 +16,33 @@
     <div class="video-info">
       <h3 class="title" title="{{currentPost.title}}" click-to-expand collapse-on="redditelly.post.change">{{currentPost.title}}</h3>
       <div class="details" ng-show="currentPost">
-        +{{currentPost.ups - currentPost.downs}}
-        <span class="divider">|</span>
-        <a href="http://reddit.com{{currentPost.permalink}}" target="_blank">
-          <ng-pluralize count="currentPost.num_comments"
-                        when="{'0': 'no comments',
-                               '1': '1 comment',
-                               'other': '{} comments'}">
-          </ng-pluralize>
-        </a>
-        <span class="divider">|</span>
-        {{currentPost.created_utc | timeago}}
-        <span class="divider">|</span>
-        <a href="http://reddit.com/user/{{currentPost.author}}" target="_blank">
-          u/{{currentPost.author}}
-        </a>
+        <div class="reddit">
+          +{{currentPost.ups - currentPost.downs}}
+          <span class="divider">|</span>
+          <a href="http://reddit.com{{currentPost.permalink}}" target="_blank">
+            <ng-pluralize count="currentPost.num_comments"
+                          when="{'0': 'no comments',
+                                 '1': '1 comment',
+                                 'other': '{} comments'}">
+            </ng-pluralize>
+          </a>
+          <span class="divider">|</span>
+          {{currentPost.created_utc | timeago}}
+          <span class="divider">|</span>
+          <a href="http://reddit.com/user/{{currentPost.author}}" target="_blank">
+            u/{{currentPost.author}}
+          </a>
+        </div>
+
+        <div class="social">
+          <a href="#tweet" tweet="{{getTweet(currentPost)}}">tweet</a>
+          <span class="divider">|</span>
+          <a href="#share">share</a>
+        </div>
       </div>
     </div>
     <div class="previous-video" ng-if="previousPost">
-      <h4 class="heading">- previous video</h4>
+      <h4 class="heading">previous video</h4>
       <div class="post">
         <img class="thumbnail" ng-src="{{previousPost.url | getVideoIDfromURL | idToThumbnail}}">
         <div class="info">
