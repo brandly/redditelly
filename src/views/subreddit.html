@@ -42,9 +42,9 @@
       </div>
     </div>
     <div class="previous-video" ng-if="previousPost">
-      <h4 class="heading">previous video</h4>
+      <h4 class="heading" ng-click="prevVideo()">previous video</h4>
       <div class="post">
-        <img class="thumbnail" ng-src="{{previousPost.url | getVideoIDfromURL | idToThumbnail}}">
+        <img class="thumbnail" ng-click="prevVideo()" ng-src="{{previousPost.url | getVideoIDfromURL | idToThumbnail}}">
         <div class="info">
           <h4 class="title" ng-click="prevVideo()" title="watch it again">{{previousPost.title}}</h4>
           <span class="details">
