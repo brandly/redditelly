@@ -80,8 +80,8 @@ angular.module('redditelly')
         $scope.currentPost = getPreviousPost()
         $scope.$broadcast 'redditelly.post.change'
 
-    $scope.selectPost = (id) ->
-        while $scope.currentPost?.id isnt id
+    $scope.selectPost = (index) ->
+        for i in [0..index] by 1
             $scope.nextVideo()
 
     $scope.$on 'youtube.player.ended', ->
