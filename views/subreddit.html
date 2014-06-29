@@ -44,7 +44,7 @@
     <div class="previous-video" ng-if="previousPost">
       <h4 class="heading" ng-click="prevVideo()">previous video</h4>
       <div class="post">
-        <img class="thumbnail" ng-click="prevVideo()" ng-src="{{previousPost.url | getVideoIDfromURL | idToThumbnail}}">
+        <img class="thumbnail" ng-click="prevVideo()" ng-src="{{previousPost.url | urlToThumbnail}}">
         <div class="info">
           <h4 class="title" ng-click="prevVideo()" title="watch it again">{{previousPost.title}}</h4>
           <span class="details">
@@ -76,7 +76,7 @@
     </div>
     <ul class="video-list">
       <li class="post" ng-repeat="post in posts" ng-click="selectPost($index)" title="{{post.title}}">
-        <img class="thumbnail" ng-src="{{post.url | getVideoIDfromURL | idToThumbnail}}">
+        <img class="thumbnail" ng-src="{{post.url | urlToThumbnail}}">
         <div class="info">
           <h4 class="title">{{post.title}}</h4>
           <span class="details">
