@@ -8,7 +8,7 @@ dependencies = [
     'redditelly.directives'
     'ui.router'
     'ui.keypress'
-    'youtube'
+    'youtube-embed'
 ]
 
 angular.module('redditelly', dependencies).config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) ->
