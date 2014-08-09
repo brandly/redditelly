@@ -19,6 +19,10 @@ angular.module('redditelly', dependencies).config(['$stateProvider', '$urlRouter
             url: '/:r/:v'
             templateUrl: 'views/subreddit.html'
             controller: 'SubredditCtrl'
+            resolve:
+                isMobile: ['$window', ($window) ->
+                    (typeof window.orientation isnt 'undefined')
+                ]
 
         $urlRouterProvider.otherwise '/youtubehaiku/hmm'
 

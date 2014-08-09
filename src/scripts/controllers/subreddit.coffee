@@ -1,6 +1,6 @@
 angular.module('redditelly')
 
-.controller 'SubredditCtrl', ['$scope', '$stateParams', '$state', '$reddit', '$youtube', ($scope, $stateParams, $state, $reddit, $youtube) ->
+.controller 'SubredditCtrl', ['$scope', '$stateParams', '$state', '$reddit', '$youtube', 'isMobile', ($scope, $stateParams, $state, $reddit, $youtube, isMobile) ->
     linkedToPost = $stateParams.v?
 
     $scope.posts = []
@@ -92,7 +92,8 @@ angular.module('redditelly')
         if time?
             $youtube.player.seekTo time, true
 
-        $youtube.player.playVideo()
+        unless isMobile
+            $youtube.player.playVideo()
         ga('send', 'event', 'Video', 'Play', $stateParams.r)
 
     setURL = (subreddit, post={}) ->
