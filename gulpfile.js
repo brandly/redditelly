@@ -99,7 +99,7 @@ gulp.task('build', [
 
 gulp.task('default', ['build'], function () {
     if (!gutil.env.gh) {
-        gulp.watch(['src/**'], ['build']);
+        gulp.watch(['src/**', 'bower_components/**'], ['build']);
 
         var
         app = express(),

@@ -1,6 +1,6 @@
 angular.module('redditelly')
 
-.controller 'SubredditCtrl', ['$scope', '$stateParams', '$state', '$reddit', '$youtube', 'isMobile', ($scope, $stateParams, $state, $reddit, $youtube, isMobile) ->
+.controller 'SubredditCtrl', ['$scope', '$stateParams', '$state', '$reddit', 'isMobile', ($scope, $stateParams, $state, $reddit, isMobile) ->
     linkedToPost = $stateParams.v?
 
     $scope.posts = []
@@ -10,6 +10,7 @@ angular.module('redditelly')
     $scope.lastPostId = null
     $scope.noMorePosts = null
     $scope.loadingPosts = false
+    $scope.player = null
 
     validDomains = ['youtube.com', 'youtu.be']
     validPost = (post) ->
@@ -73,8 +74,13 @@ angular.module('redditelly')
         return previous
 
     $scope.nextVideo = ->
-        $scope.currentPost = getNextPost()
-        $scope.$broadcast 'redditelly.post.change'
+        next = getNextPost()
+        if next.id is $scope.currentPost?.id
+            # we want something new
+            $scope.nextVideo()
+        else
+            $scope.currentPost = next
+            $scope.$broadcast 'redditelly.post.change'
 
     $scope.prevVideo = ->
         $scope.currentPost = getPreviousPost()
@@ -87,13 +93,8 @@ angular.module('redditelly')
     $scope.$on 'youtube.player.ended', ->
         $scope.nextVideo()
 
-    $scope.$on 'youtube.player.ready', ->
-        time = $youtube.getTimeFromURL $scope.currentPost.url
-        if time?
-            $youtube.player.seekTo time, true
-
-        unless isMobile
-            $youtube.player.playVideo()
+    $scope.$on 'youtube.player.ready', ($event, player) ->
+        player.playVideo() unless isMobile
         ga('send', 'event', 'Video', 'Play', $stateParams.r)
 
     setURL = (subreddit, post={}) ->
@@ -116,12 +117,13 @@ angular.module('redditelly')
         e.preventDefault()
 
     $scope.togglePlayer = ->
-        return unless $youtube.player?
+        {player} = $scope
+        return unless player?
 
-        if $youtube.currentState is 'playing'
-            $youtube.player.pauseVideo()
+        if player.currentState is 'playing'
+            player.pauseVideo()
         else
-            $youtube.player.playVideo()
+            player.playVideo()
 
     truncate = (str, max) ->
         if str.length > max
