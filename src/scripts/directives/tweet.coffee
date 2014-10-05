@@ -16,9 +16,6 @@ angular.module('redditelly.directives')
                 top = ($window.innerHeight - height) / 2
                 left = ($window.innerWidth - width) / 2
 
-                console.log 'TOP', top
-                console.log 'LEFT', left
-
                 url = "#{base}?text=#{encodeURIComponent scope.tweet}"
                 opts = "status=1,width=#{width},height=#{height},top=#{top},left=#{left}"
 
