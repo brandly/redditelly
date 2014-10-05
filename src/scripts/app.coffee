@@ -24,7 +24,7 @@ angular.module('redditelly', dependencies).config(['$stateProvider', '$urlRouter
                     (typeof window.orientation isnt 'undefined')
                 ]
 
-        $urlRouterProvider.otherwise '/youtubehaiku/hmm'
+        $urlRouterProvider.otherwise '/videos/'
 
 ]).run(['$rootScope', ($rootScope) ->
     $rootScope.$on '$stateChangeSuccess', (e, toState, toParams) ->
