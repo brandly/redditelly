@@ -104,7 +104,7 @@ angular.module('redditelly')
             r: subreddit
             v: post.id
         }, {
-            location: false
+            location: true
             reload: false
             notify: false
         }
